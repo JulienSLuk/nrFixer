@@ -10,7 +10,7 @@ Macro Name: WhitelistCheckAndRun
 - Access Control: If the name is not found in the whitelist, the macro will prevent execution and display a notification. If the name is found, the user will be authorized to run the other macros.
 
 Usage:
-- Run this macro before executing any other macros to ensure that only authorized users can proceed.
+Run this macro before executing any other macros to ensure that only authorized users can proceed.
 
 
 2. Find Missing NRICs and Output to Column C
@@ -21,7 +21,7 @@ Macro Name: FindMissingNRICsToColumnC
 - Output: Missing NRICs will be displayed starting from cell C2 in the current sheet.
 
 Usage:
-- Run this macro to identify and display missing NRICs in the active sheet.
+Run this macro to identify and display missing NRICs in the active sheet.
 
 
 3. Output Missing NRICs with Associated Data
@@ -32,7 +32,7 @@ Macro Name: OutputMissingNRICsWithData
 - Output: The macro will populate the output sheet with the missing NRICs and corresponding details.
 
 Usage:
-- Run this macro after identifying missing NRICs in Column C to output the relevant data to the output sheet.
+Run this macro after identifying missing NRICs in Column C to output the relevant data to the output sheet.
 
 
 4. Clean Up Output Sheet
@@ -42,7 +42,7 @@ Macro Name: CleanUpOutputSheet
 - Output: All data from row 2 onwards (in columns A-D) will be cleared.
 
 Usage:
-- Run this macro after completing a task to clean up the output sheet and prepare it for new data.
+Run this macro after completing a task to clean up the output sheet and prepare it for new data.
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
