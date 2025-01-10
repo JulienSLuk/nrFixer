@@ -8,6 +8,9 @@ Sub OutputMissingNRICsWithData()
     Dim lastRowOutput As Long
     Dim cell As Range
     Dim outputRow As Long
+
+    ' Whitelist check at the beginning
+    If Not IsUserWhitelisted() Then Exit Sub
     
     ' Set worksheets
     Set wsCurrent = ThisWorkbook.ActiveSheet
