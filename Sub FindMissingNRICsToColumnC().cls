@@ -14,8 +14,8 @@ Sub FindMissingNRICsToColumnC()
     ' Create a dictionary to store NRICs from column A of the current sheet
     Set currentNRICs = CreateObject("Scripting.Dictionary")
     
-    ' Clear previous data in Column C
-    wsCurrent.Columns("C").ClearContents
+    ' Clear previous data in Column C, starting from row 2 (preserving header in C1)
+    wsCurrent.Range("C2:C" & wsCurrent.Rows.Count).ClearContents
     
     ' Find the last row in column A of the current sheet
     lastRowCurrent = wsCurrent.Cells(wsCurrent.Rows.Count, "A").End(xlUp).Row
@@ -44,4 +44,3 @@ Sub FindMissingNRICsToColumnC()
     ' Notify user of completion
     MsgBox "Missing NRICs have been output to column C.", vbInformation
 End Sub
-
