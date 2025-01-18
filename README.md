@@ -1,84 +1,139 @@
-Macro Automation for NRIC Processing
-This project contains a set of Excel VBA macros designed for managing and processing NRIC data, with additional user access control through a whitelist. The macros assist with tasks such as finding missing NRICs, cleaning up data, and outputting results in an organized manner, while restricting access to only authorized users.
+Here’s a **README** for the collection of VBA macros you’ve been working with:
 
-Macros Included
-1. Whitelist Check
-Macro Name: WhitelistCheckAndRun
+---
 
-- Function: Prompts the user to enter their name and checks if it exists in a predefined whitelist.
-- Whitelist Sheet: The whitelist of names should be stored in a sheet called whitelist with the names starting from A2.
-- Access Control: If the name is not found in the whitelist, the macro will prevent execution and display a notification. If the name is found, the user will be authorized to run the other macros.
+# VBA Macros for Managing Data in Excel
 
-Usage:
-Run this macro before executing any other macros to ensure that only authorized users can proceed.
+This repository contains a collection of VBA macros designed to manage and manipulate data in Excel sheets. These macros streamline processes like comparing and cleaning data, filtering, and exporting results, helping automate data processing tasks for efficient workflow management.
 
+## Table of Contents
 
-2. Find Missing NRICs and Output to Column C
-Macro Name: FindMissingNRICsToColumnC
+- [Macros Overview](#macros-overview)
+- [Setup and Usage](#setup-and-usage)
+- [Individual Macros](#individual-macros)
+  - [FindMissingNRICsToColumnC](#findmissingnricstocolumnc)
+  - [CleanUpNRICsInColumnA](#cleanupnricsincolumna)
+  - [ExportMissingDataToOutput](#exportmissingdatatooutput)
+  - [Whitelist Check](#whitelist-check)
+  - [AddColumnDataFromPd](#addcolumndatafrompd)
+  - [CleanupOutputSheet](#cleanupoutputsheet)
+- [Testing Data](#testing-data)
 
-- Function: This macro compares the NRICs listed in the current sheet (Column A) against a separate data set in the rawNR sheet, then outputs any missing NRICs into Column C.
-- Input: The current sheet should have a list of NRICs in Column A.
-- Output: Missing NRICs will be displayed starting from cell C2 in the current sheet.
+---
 
-Usage:
-Run this macro to identify and display missing NRICs in the active sheet.
+## Macros Overview
 
+These macros are intended to work on sheets that contain personnel data, typically formatted with columns for NRIC, name, email, status, and more. They allow for easy searching, matching, cleaning, and exporting of data between sheets.
 
-3. Output Missing NRICs with Associated Data
-Macro Name: OutputMissingNRICsWithData
+## Setup and Usage
 
-- Function: This macro outputs missing NRICs (identified from Column C) along with associated data (Name, Email, Address) from the rawNR sheet to the output sheet.
-- Input: Missing NRICs should be listed in Column C of the current sheet.
-- Output: The macro will populate the output sheet with the missing NRICs and corresponding details.
+1. **Add Macros to Excel**:
+   - Open Excel.
+   - Press `Alt + F11` to open the VBA editor.
+   - Insert a new module (`Insert > Module`).
+   - Paste the relevant macro code into the module.
 
-Usage:
-Run this macro after identifying missing NRICs in Column C to output the relevant data to the output sheet.
+2. **Running Macros**:
+   - You can run macros from the VBA editor (`F5` or right-click and choose `Run`).
+   - Alternatively, you can assign these macros to buttons in the worksheet for ease of use.
 
+---
 
-4. Clean Up Output Sheet
-Macro Name: CleanUpOutputSheet
+## Individual Macros
 
-- Function: This macro clears the data in the output sheet, keeping only the header row intact.
-- Output: All data from row 2 onwards (in columns A-D) will be cleared.
+### **FindMissingNRICsToColumnC**
+This macro checks for NRICs in the `rawNR` sheet that are missing from column A of the active sheet. It outputs the missing NRICs in **column C**.
 
-Usage:
-Run this macro after completing a task to clean up the output sheet and prepare it for new data.
+#### Features:
+- Compares NRICs in the active sheet and `rawNR` sheet.
+- Outputs missing NRICs to column C.
 
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---
 
-How to Use the Macros
-1. Ensure the whitelist sheet is set up:
-- Create a sheet called whitelist.
-- Enter the names of authorized users in Column A, starting from A2.
+### **CleanUpNRICsInColumnA**
+This macro clears all the NRIC data in **column A** from row 2 to the last row with data, leaving the header intact.
 
-2. Run the Whitelist Check:
-- Run the WhitelistCheckAndRun macro to verify user access. The user will be prompted to enter their name.
+#### Features:
+- Clears only the data in column A (NRICs) while keeping the header in row 1.
 
-3. Run the Other Macros:
-- After passing the whitelist check, you can run any of the other macros:
-- FindMissingNRICsToColumnC to find missing NRICs.
-- OutputMissingNRICsWithData to output the missing NRICs with associated data to the output sheet.
-- CleanUpOutputSheet to clear the output sheet.
+---
 
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+### **ExportMissingDataToOutput**
+This macro finds missing NRICs from the active sheet and exports the relevant data (NRIC, name, rank, etc.) to a sheet called **`output`**.
 
-Dependencies
-Excel (VBA-enabled) required for running the macros.
-The following sheets must be present:
-whitelist: For storing authorized names.
-rawNR: For storing NRIC and associated data (NRIC, Name, Address, Email).
-output: For displaying output results.
+#### Features:
+- Exports missing NRICs from the active sheet.
+- Maps related data from `rawNR` to the `output` sheet.
 
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---
 
-Customization
-Modify the whitelist sheet to add or remove authorized users.
-The columns in the rawNR sheet (for NRIC, Name, Address, Email) can be customized based on your specific data structure, but the macro assumes they are in the same format.
-The output sheet is customizable for other types of data display or analysis.
+### **Whitelist Check**
+This macro prompts the user to enter their name, checks if the name exists in the `whitelist` sheet, and ensures only authorized users can run other macros.
 
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#### Features:
+- Verifies user name before allowing access to macro functionalities.
+- Can be integrated into other macros to control access.
 
-Notes
-Ensure the whitelist sheet has the header Names in cell A1.
-Column references (like A, C, etc.) in the macros are based on the assumption that the data structure in your sheets follows the given format.
-You can easily add more macros or adjust the existing ones as per your requirements.
+---
+
+### **AddColumnDataFromPd**
+This macro appends data from the **`pd`** sheet (columns Q and S) to the **`output`** sheet (columns M and N), based on matching NRICs.
+
+#### Features:
+- Appends relevant data from the `pd` sheet.
+- Ensures columns Q and S from `pd` are mapped to the correct columns in `output`.
+
+---
+
+### **CleanupOutputSheet**
+This macro prompts the user with a confirmation message asking if they want to clean up the `output` sheet, clearing data in the NRIC, name, rank, and other columns while preserving the headers.
+
+#### Features:
+- Cleans up the `output` sheet after processing.
+- Clears all data except for the header row.
+
+---
+
+## Testing Data
+
+You can use the following test data to ensure the macros work as expected:
+
+### **Test Data for `rawNR` Sheet**
+
+| **NRIC**   | **NAME**  | **ADDRESS**       | **EMAIL**            | **RANK** |
+|------------|-----------|-------------------|----------------------|----------|
+| S1234567A  | John Doe  | 123 Example St    | johndoe@hr.com       | HR Specialist |
+| T7654321B  | Jane Smith| 456 Sample Road   | janesmith@eng.com    | Engineer |
+| G8765432D  | Alex Brown| 789 Placeholder Ln| alexbrown@int.com    | Intern |
+| F2345678C  | Emily White| 789 Mock Ave      | emilywhite@ld.com    | Lead |
+
+---
+
+### **Test Data for `output` Sheet**
+
+| **NRIC**   | **NAME**      | **RANK**         | **EMAIL**            | **ADDRESS**       |
+|------------|---------------|------------------|----------------------|-------------------|
+| S1234567A  | John Doe      | HR Specialist    | johndoe@hr.com       | 123 Example St    |
+| T7654321B  | Jane Smith    | Engineer         | janesmith@eng.com    | 456 Sample Road   |
+
+---
+
+### **Test Data for `pd` Sheet**
+
+| **NRIC**   | **Q (Output Column N)**  | **S (Output Column M)** |
+|------------|--------------------------|-------------------------|
+| S1234567A  | Completed Training       | Eligible for Promotion |
+| T7654321B  | Exceeds Expectations     | Consider for Bonus     |
+| G8765432D  | Pending Evaluation       | On Hold                |
+| F2345678C  | Leadership Certified     | Eligible for Award     |
+| S9876543E  | Top Performer            | Recommended for Raise  |
+
+---
+
+### License
+
+This project is open-source. Feel free to use, modify, and distribute the code under the terms of the MIT License.
+
+---
+
+This **README** provides an overview of the macros, their functionality, and test data to ensure everything works as expected. Let me know if any further details are needed!
