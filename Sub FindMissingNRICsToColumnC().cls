@@ -6,7 +6,7 @@ Sub FindMissingNRICsToColumnC()
     Dim lastRowCurrent As Long
     Dim lastRowRawNR As Long
     Dim outputRow As Long
-    
+  
     ' Set worksheets
     Set wsCurrent = ThisWorkbook.ActiveSheet
     Set wsRawNR = ThisWorkbook.Sheets("rawNR")
@@ -27,14 +27,14 @@ Sub FindMissingNRICsToColumnC()
         End If
     Next cell
     
-    ' Find the last row in column A of the rawNR sheet
-    lastRowRawNR = wsRawNR.Cells(wsRawNR.Rows.Count, "A").End(xlUp).Row
+    ' Find the last row in column B of the rawNR sheet
+    lastRowRawNR = wsRawNR.Cells(wsRawNR.Rows.Count, "B").End(xlUp).Row
     
     ' Start outputting missing NRICs to column C, starting at row 2
     outputRow = 2
     
     ' Check NRICs in rawNR sheet but not in the dictionary
-    For Each cell In wsRawNR.Range("A2:A" & lastRowRawNR)
+    For Each cell In wsRawNR.Range("B2:B" & lastRowRawNR)
         If Not currentNRICs.exists(cell.Value) Then
             wsCurrent.Cells(outputRow, "C").Value = cell.Value
             outputRow = outputRow + 1
@@ -44,3 +44,4 @@ Sub FindMissingNRICsToColumnC()
     ' Notify user of completion
     MsgBox "Missing NRICs have been output to column C.", vbInformation
 End Sub
+

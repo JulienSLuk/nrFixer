@@ -14,3 +14,4 @@ Sub CleanUpNRICsInColumnA()
     ' Notify the user that the NRICs have been cleared
     MsgBox "NRICs in column A have been cleaned up.", vbInformation
 End Sub
+

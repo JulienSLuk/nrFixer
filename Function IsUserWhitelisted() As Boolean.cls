@@ -32,3 +32,4 @@ Function IsUserWhitelisted() As Boolean
     MsgBox "Your name is not in the whitelist. You are not authorized to run the macros.", vbCritical
     IsUserWhitelisted = False
 End Function
+

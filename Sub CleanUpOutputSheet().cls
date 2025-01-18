@@ -1,7 +1,7 @@
 Sub CleanUpOutputSheet()
     Dim wsOutput As Worksheet
     Dim lastRowOutput As Long
-    
+     
     ' Set the output sheet
     Set wsOutput = ThisWorkbook.Sheets("output")
     

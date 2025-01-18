@@ -8,9 +8,6 @@ Sub OutputMissingNRICsWithData()
     Dim lastRowOutput As Long
     Dim cell As Range
     Dim outputRow As Long
-
-    ' Whitelist check at the beginning
-    If Not IsUserWhitelisted() Then Exit Sub
     
     ' Set worksheets
     Set wsCurrent = ThisWorkbook.ActiveSheet
@@ -30,20 +27,20 @@ Sub OutputMissingNRICsWithData()
         End If
     Next cell
     
-    ' Find the last row in column A of the rawNR sheet
-    lastRowRawNR = wsRawNR.Cells(wsRawNR.Rows.Count, "A").End(xlUp).Row
+    ' Find the last row in column B (NRIC) of the rawNR sheet
+    lastRowRawNR = wsRawNR.Cells(wsRawNR.Rows.Count, "B").End(xlUp).Row
     
     ' Find the last row in the output sheet to append data
     lastRowOutput = wsOutput.Cells(wsOutput.Rows.Count, "A").End(xlUp).Row + 1
     
     ' Loop through each NRIC in the rawNR sheet and check if it's missing (exists in currentNRICs)
-    For Each cell In wsRawNR.Range("A2:A" & lastRowRawNR)
+    For Each cell In wsRawNR.Range("B2:B" & lastRowRawNR)
         If currentNRICs.exists(cell.Value) Then
             ' Copy the data to the output sheet
-            wsOutput.Cells(lastRowOutput, "A").Value = cell.Value       ' NRIC
-            wsOutput.Cells(lastRowOutput, "B").Value = cell.Offset(0, 1).Value ' NAME
-            wsOutput.Cells(lastRowOutput, "C").Value = cell.Offset(0, 3).Value ' EMAIL
-            wsOutput.Cells(lastRowOutput, "D").Value = cell.Offset(0, 2).Value ' ADDRESS
+            wsOutput.Cells(lastRowOutput, "A").Value = cell.Offset(0, -1).Value   ' PERNR
+            wsOutput.Cells(lastRowOutput, "B").Value = cell.Value                ' NRIC
+            wsOutput.Cells(lastRowOutput, "C").Value = cell.Offset(0, 3).Value   ' RANK
+            wsOutput.Cells(lastRowOutput, "D").Value = cell.Offset(0, 1).Value   ' NAME
             lastRowOutput = lastRowOutput + 1
         End If
     Next cell
@@ -51,5 +48,4 @@ Sub OutputMissingNRICsWithData()
     ' Notify user of completion
     MsgBox "Missing NRICs and their data have been output to the 'output' sheet.", vbInformation
 End Sub
-
 
