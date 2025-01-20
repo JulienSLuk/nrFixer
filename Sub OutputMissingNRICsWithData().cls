@@ -41,6 +41,8 @@ Sub OutputMissingNRICsWithData()
             wsOutput.Cells(lastRowOutput, "B").Value = cell.Value                ' NRIC
             wsOutput.Cells(lastRowOutput, "C").Value = cell.Offset(0, 3).Value   ' RANK
             wsOutput.Cells(lastRowOutput, "D").Value = cell.Offset(0, 1).Value   ' NAME
+            wsOutput.Cells(lastRowOutput, "K").Value = cell.Offset(0, 4).Value   ' DOB
+            wsOutput.Cells(lastRowOutput, "L").Value = cell.Offset(0, 5).Value   ' DOI
             lastRowOutput = lastRowOutput + 1
         End If
     Next cell
